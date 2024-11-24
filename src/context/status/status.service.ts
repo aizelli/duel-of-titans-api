@@ -4,16 +4,29 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Status } from './entities/status.entity';
+import { Character } from '../characters/entities/character.entity';
+import { error } from 'console';
 
 @Injectable()
 export class StatusService {
   constructor(
     @InjectRepository(Status)
-    private statusRepository: Repository<Status>
+    private statusRepository: Repository<Status>,
+    @InjectRepository(Character)
+    private characterRepository: Repository<Character>
   ) { }
 
-  create(createStatusDto: CreateStatusDto) {
-    return this.statusRepository.save(createStatusDto);
+  async create(createStatusDto: CreateStatusDto): Promise<Status>{
+    const characters : Character  = await this.characterRepository.findOneBy({
+      id: createStatusDto.charactersId,
+    });
+    if(!characters){
+      throw new Error('Personagem não encontrado');
+    }
+    const status : Status = this.statusRepository.create({
+      ...createStatusDto, characters,
+    });
+    return this.statusRepository.save(status);
   }
 
   findAll() {

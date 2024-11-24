@@ -6,7 +6,7 @@ export class CreateUserDto {
         description: 'Nome do usuário',
         example: 'Nome Sobrenome',
     })
-    nome: string;
+    name: string;
 
     @ApiProperty({
         description: 'Email do usuário',
@@ -18,12 +18,12 @@ export class CreateUserDto {
         description: 'Senha do usuário',
         example: 'senhaSegura123',
     })
-    senha: string;
+    password: string;
 
     @ApiProperty({
         description: 'Tipo de usuário',
         enum: UserRole,
         example: UserRole.USER,
     })
-    tipo: UserRole;
+    type: UserRole;
 }

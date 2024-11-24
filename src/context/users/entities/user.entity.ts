@@ -39,7 +39,7 @@ export class User {
     type: UserRole;
 
     @ApiProperty({ type: () => [Character], description: 'Lista de personagens associados ao usuário' })
-    @ManyToMany(() => Character, (character) => character.users, { cascade: true })
+    @ManyToMany(() => Character, (character) => character.userIds, {eager: true})
     @JoinTable() // Define a tabela intermediária
     characters: Character[];
 }

@@ -1,6 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateStatusDto {
+    @ApiProperty({ example: 1, description: 'ID do personagem associado' })
+    charactersId: number;
+
     @ApiProperty({ example: 100, description: 'Vida atual' })
     health: number;
 

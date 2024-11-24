@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Character } from "src/context/characters/entities/character.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Status {
@@ -80,4 +80,5 @@ export class Status {
     @OneToOne(() => Character)
     @JoinColumn()
     characters: Character;
+
 }

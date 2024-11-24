@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from 'src/context/users/entities/user.entity';
 import { Status } from 'src/context/status/entities/status.entity';
@@ -21,34 +21,30 @@ export class Character {
     @Column({ type: 'text' })
     imagem: string;
 
-    @ApiProperty({ example: 1, description: 'Level do personagem' })
+    @ApiProperty({ example: 1, description: 'Level atual do personagem' })
     @Column('integer')
     level: number;
 
-    @ApiProperty({ example: 1, description: 'Experiencia do personagem' })
+    @ApiProperty({ example: 1, description: 'Total de experiencia do personagem' })
     @Column('integer')
     experience: number;
 
-    // @ApiProperty({ type: () => Status, description: 'Status associado ao personagem' })
-    // @OneToOne(() => Status, (status) => status.characters)
-    // status: Status;
-    
-    @ApiProperty({ type: () => [User], description: 'Lista de usuários associados ao personagem' })
-    @ManyToMany(() => User, (user) => user.characters)
-    users: User[];
+    @ApiProperty({ example: 100, description: 'Total de moedas do personagem' })
+    @Column('integer')
+    coins: number;
+
+    @ApiProperty({ type: () => Status, description: 'Status associado ao personagem' })
+    @OneToOne(() => Status, (status) => status.characters)
+    status: Status;
+
+    @ApiProperty({ example: [1, 2], description: 'Lista de IDs dos usuários associados ao personagem' })
+    @ManyToMany(() => User)
+    userIds: number[];
 
     @OneToMany(() => InventorySlot, (inventorySlot) => inventorySlot.characters)
     inventorySlots: InventorySlot[];
 
     @OneToMany(() => EquipmentSlot, (equipmentSlot) => equipmentSlot.characters)
     equipmentSlot: EquipmentSlot[];
-
-    // @ApiProperty({ type: () => [Weapon], description: 'Lista de armamentos associados ao personagem' })
-    // @ManyToMany(() => Weapon, (weapon) => weapon.characters)
-    // weapons: Weapon[];
-
-    // @ApiProperty({ type: () => [Armor], description: 'Lista de armamentos associados ao personagem' })
-    // @ManyToMany(() => Armor, (armor) => armor.characters)
-    // armors: Armor[];
 }
 

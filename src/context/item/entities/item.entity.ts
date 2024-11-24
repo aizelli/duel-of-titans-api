@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { InventorySlot } from "src/context/inventory-slot/entities/inventory-slot.entity";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum typeItemName {
     CONSUMABLE = 'consumable',
@@ -14,7 +15,7 @@ export class Item {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ApiProperty({ example: 1, description: 'nome do Item' })
+    @ApiProperty({ example: 'Poção de vida', description: 'Nome do Item' })
     @Column('varchar')
     name: string;
 
@@ -22,11 +23,18 @@ export class Item {
     @Column({ type: 'enum', enum: typeItemName, default: typeItemName.CONSUMABLE })
     type: typeItemName;
 
-    @ApiProperty({ example: 1, description: 'Quantidade máxima do item' })
+    @ApiProperty({ example: 99, description: 'Quantidade máxima do item' })
     @Column({ default: 1 })
     maxStack: number;
 
-    @ApiProperty({ example: 'Força +1', description: 'Atributos especifico do item' })
+    @ApiProperty({ example: 5, description: 'Valor padão de venda do item' })
+    @Column({ default: 1 })
+    priceToSell: number;
+
+    @ApiProperty({ example: '{"Vida": 5}', description: 'Atributos especifico do item' })
     @Column({ type: 'json', nullable: true })
     attributes: Record<string, any>;
+
+    @ManyToMany(() => InventorySlot, (inventorySlot) => inventorySlot.items)
+    inventorySlots: InventorySlot[];
 }
