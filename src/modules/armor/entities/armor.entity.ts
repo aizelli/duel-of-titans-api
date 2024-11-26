@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Character } from "src/context/characters/entities/character.entity";
+import { Character } from "src/modules/characters/entities/character.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

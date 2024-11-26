@@ -1,6 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Character } from 'src/context/characters/entities/character.entity';
+import { Character } from 'src/modules/characters/entities/character.entity';
 
 export enum UserRole {
     ADMIN = 'admin',
@@ -37,6 +37,21 @@ export class User {
         default: UserRole.USER,
     })
     type: UserRole;
+
+    @ApiProperty({ example: new Date(), description: 'Data de criação do usuário' })
+    @Column({
+        type: 'datetime',
+        default: () => 'CURRENT_TIMESTAMP', // Define a data atual por padrão
+    })
+    createAt: Date;
+
+    @ApiProperty({ example: new Date(), description: 'Data de atualização do usuário' })
+    @Column({
+        type: 'datetime',
+        default: () => 'CURRENT_TIMESTAMP', // Define a data atual por padrão
+        onUpdate: 'CURRENT_TIMESTAMP', // Atualiza automaticamente
+    })
+    updateAt: Date;
 
     @ApiProperty({ type: () => [Character], description: 'Lista de personagens associados ao usuário' })
     @ManyToMany(() => Character, (character) => character.userIds, {eager: true})

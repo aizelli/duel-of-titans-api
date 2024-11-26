@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { InventorySlot } from "src/context/inventory-slot/entities/inventory-slot.entity";
+import { InventorySlot } from "src/modules/inventory-slot/entities/inventory-slot.entity";
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum typeItemName {

@@ -1,11 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/context/users/entities/user.entity';
-import { Status } from 'src/context/status/entities/status.entity';
-import { Weapon } from 'src/context/weapon/entities/weapon.entity';
-import { Armor } from 'src/context/armor/entities/armor.entity';
-import { InventorySlot } from 'src/context/inventory-slot/entities/inventory-slot.entity';
-import { EquipmentSlot } from 'src/context/equipment-slot/entities/equipment-slot.entity';
+import { User } from 'src/modules/users/entities/user.entity';
+import { Status } from 'src/modules/status/entities/status.entity';
+import { Weapon } from 'src/modules/weapon/entities/weapon.entity';
+import { Armor } from 'src/modules/armor/entities/armor.entity';
+import { InventorySlot } from 'src/modules/inventory-slot/entities/inventory-slot.entity';
+import { EquipmentSlot } from 'src/modules/equipment-slot/entities/equipment-slot.entity';
 
 @Entity()
 export class Character {
@@ -29,9 +29,36 @@ export class Character {
     @Column('integer')
     experience: number;
 
+    @ApiProperty({ example: 1000, description: 'Total de pontos de experiência para o próximo level do personagem' })
+    @Column('integer')
+    experienceNextLevel: number;
+
+    @ApiProperty({ example: 3, description: 'Quantidade disponível de pontos de atributos' })
+    @Column('integer')
+    availableAttributePoints: number;
+
+    @ApiProperty({ example: 100, description: 'Total geral de pontos de atributos do personagem' })
+    @Column('integer')
+    totalAttributePoints: number;
+
     @ApiProperty({ example: 100, description: 'Total de moedas do personagem' })
     @Column('integer')
     coins: number;
+
+    @ApiProperty({ example: new Date(), description: 'Data de criação do personagem' })
+    @Column({
+        type: 'datetime',
+        default: () => 'CURRENT_TIMESTAMP', // Define a data atual por padrão
+    })
+    createAt: Date;
+
+    @ApiProperty({ example: new Date(), description: 'Data de atualização do personagem' })
+    @Column({
+        type: 'datetime',
+        default: () => 'CURRENT_TIMESTAMP', // Define a data atual por padrão
+        onUpdate: 'CURRENT_TIMESTAMP', // Atualiza automaticamente
+    })
+    updateAt: Date;
 
     @ApiProperty({ type: () => Status, description: 'Status associado ao personagem' })
     @OneToOne(() => Status, (status) => status.characters)
