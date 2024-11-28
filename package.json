@@ -13,11 +13,18 @@
   "license": "ISC",
   "dependencies": {
     "@nestjs/common": "^10.4.8",
+    "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.4.8",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.4.8",
     "@nestjs/swagger": "^8.0.7",
     "@nestjs/typeorm": "^10.0.2",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
     "mysql2": "^3.11.4",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.20"
@@ -26,6 +33,7 @@
     "@nestjs/cli": "^10.4.8",
     "@nestjs/schematics": "^10.2.3",
     "@types/node": "^22.9.1",
+    "@types/passport-jwt": "^4.0.1",
     "typescript": "^5.6.3"
   }
 }

@@ -8,16 +8,19 @@ import { ItemModule } from './modules/item/item.module';
 import { InventorySlotModule } from './modules/inventory-slot/inventory-slot.module';
 import { EquipmentSlotModule } from './modules/equipment-slot/equipment-slot.module';
 import { ExperienceLevelsModule } from './modules/experience-levels/experience-levels.module';
+import { AuthModule } from './modules/auth/auth.module';
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig), 
+    TypeOrmModule.forRoot(typeOrmConfig),
+    AuthModule,
     UsersModule, 
     CharactersModule, 
     StatusModule, 
     ItemModule, 
     InventorySlotModule, 
     EquipmentSlotModule,
-    ExperienceLevelsModule
+    ExperienceLevelsModule,
+    
   ]
 })
 export class AppModule { }
