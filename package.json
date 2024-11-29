@@ -1,6 +1,6 @@
 {
-  "name": "api-ggm",
-  "version": "1.0.0",
+  "name": "duel-of-titans",
+  "version": "alfa-1.0.0",
   "description": "",
   "main": "dist/src/main",
   "scripts": {
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@nestjs/cli": "^10.4.8",
     "@nestjs/schematics": "^10.2.3",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^22.9.1",
     "@types/passport-jwt": "^4.0.1",
     "typescript": "^5.6.3"

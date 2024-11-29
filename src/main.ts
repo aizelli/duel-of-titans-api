@@ -7,9 +7,9 @@ async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     const config = new DocumentBuilder()
-        .setTitle('Minha API')
+        .setTitle('API Duel of Titans')
         .setDescription('Documentação da API')
-        .setVersion('1.0')
+        .setVersion('alfa-1.0')
         .addBearerAuth(
             {
                 type: 'http',

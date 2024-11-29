@@ -6,7 +6,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     port: 3306,
     username: 'root',
     password: '',
-    database: 'myheros',
+    database: 'duel-of-titans',
     entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
     ],

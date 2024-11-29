@@ -14,7 +14,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Cria um novo usuário' })
   @ApiResponse({ status: 201, description: 'Usuário criado com sucesso.', type: User, })
   @ApiResponse({ status: 400, description: 'Parâmetros inválidos.' })
-  create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
