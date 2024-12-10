@@ -77,8 +77,7 @@ export class Status {
     criticalDamage: number;
 
     @ApiProperty({ type: () => Character, description: 'Personagem associado ao status' })
-    @OneToOne(() => Character)
-    @JoinColumn()
-    characters: Character;
+    @OneToOne(() => Character, (character) => character.status) // Relação inversa
+    character: Character;
 
 }

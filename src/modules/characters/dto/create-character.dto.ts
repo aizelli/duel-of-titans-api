@@ -31,6 +31,6 @@ export class CreateCharacterDto {
     @ApiProperty({ example: new Date(), description: 'Data de atualização do personagem' })
     updateAt: Date;
 
-    @ApiProperty({ type: [Number], description: 'Lista de IDs dos usuários associados ao personagem' })
-    users: number[];
+    @ApiProperty({ example: 1, description: 'Lista de IDs dos usuários associados ao personagem' })
+    userId: number;
 }

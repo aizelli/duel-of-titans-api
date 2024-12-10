@@ -34,6 +34,15 @@ export class CharactersController {
     return this.charactersService.findOne(+id);
   }
 
+  @Get('user/:userId')
+  @ApiOperation({ summary: 'Retorna uma lista de personagens pelo Id do usuário' })
+  @ApiParam({ name: 'userId', description: 'ID do usuário', example: 1 })
+  @ApiResponse({ status: 200, description: 'Lista de personagens retornada com sucesso.', type: Character, })
+  @ApiResponse({ status: 404, description: 'Lista de personagens não encontrado.' })
+  findByUserId(@Param('userId') userId: number) {
+    return this.charactersService.findByUserId(userId);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'Atualiza um personagem pelo ID' })
   @ApiParam({ name: 'id', description: 'ID do personagem', example: 1 })

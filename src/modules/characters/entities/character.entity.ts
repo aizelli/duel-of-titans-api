@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from 'src/modules/users/entities/user.entity';
 import { Status } from 'src/modules/status/entities/status.entity';
@@ -61,12 +61,13 @@ export class Character {
     updateAt: Date;
 
     @ApiProperty({ type: () => Status, description: 'Status associado ao personagem' })
-    @OneToOne(() => Status, (status) => status.characters)
+    @OneToOne(() => Status, (status) => status.character, { cascade: true }) // Relação 1x1 com cascata
+    @JoinColumn() // Garante que o Status estará na mesma tabela
     status: Status;
 
-    @ApiProperty({ example: [1, 2], description: 'Lista de IDs dos usuários associados ao personagem' })
-    @ManyToMany(() => User)
-    userIds: number[];
+    @ApiProperty({ type: () => User, description: 'Usuário associado ao personagem' })
+    @ManyToOne(() => User, (user) => user.characters)
+    user: User;
 
     @OneToMany(() => InventorySlot, (inventorySlot) => inventorySlot.characters)
     inventorySlots: InventorySlot[];

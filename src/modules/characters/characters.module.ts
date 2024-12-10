@@ -3,11 +3,15 @@ import { CharactersService } from './characters.service';
 import { CharactersController } from './characters.controller';
 import { Character } from './entities/character.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from '../users/users.module';
+import { StatusModule } from '../status/status.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Character])],
+    TypeOrmModule.forFeature([Character]),
+    UsersModule, StatusModule],
   controllers: [CharactersController],
   providers: [CharactersService],
+  exports: [TypeOrmModule]
 })
 export class CharactersModule { }
