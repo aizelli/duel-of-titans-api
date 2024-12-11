@@ -40,7 +40,6 @@ export class StatusController {
   @ApiResponse({ status: 200, description: 'Status atualizado com sucesso.', type: Status, })
   @ApiResponse({ status: 404, description: 'Status não encontrado.' })
   update(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
-    console.log("controller", updateStatusDto)
     return this.statusService.update(+id, updateStatusDto);
   }
 

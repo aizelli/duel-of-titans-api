@@ -3,10 +3,23 @@ import { InventorySlot } from "src/modules/inventory-slot/entities/inventory-slo
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum typeItemName {
-    CONSUMABLE = 'consumable',
-    WEAPON = 'weapon',
-    SHIELD = 'shield',
-    ARMOR = 'armor'
+    CONSUMABLE = 'Consumable',
+    WEAPON = 'Weapon',
+    SHIELD = 'Shield',
+    ARMOR = 'Armor'
+}
+
+export enum typeItemRarity {
+    SCRAP = 'Scrap',
+    IMPROVISED = 'Improvised',
+    COMMON = 'Common',
+    UNCOMMON = 'Uncommon',
+    RARE = 'Rare',
+    EPIC = 'Epic',
+    LEGENDARY = 'Legendary',
+    MYTHIC = 'Mythic',
+    TRANSCENDENT = 'Transcendent',
+    DIVINE = 'Divine'
 }
 
 @Entity()
@@ -22,6 +35,10 @@ export class Item {
     @ApiProperty({ description: 'Tipo de item', enum: typeItemName, example: typeItemName.CONSUMABLE })
     @Column({ type: 'enum', enum: typeItemName, default: typeItemName.CONSUMABLE })
     type: typeItemName;
+
+    @ApiProperty({ description: 'Raridade do item', enum: typeItemRarity, example: typeItemRarity.SCRAP })
+    @Column({ type: 'enum', enum: typeItemRarity, default: typeItemRarity.SCRAP })
+    rarity: typeItemRarity;
 
     @ApiProperty({ example: 99, description: 'Quantidade máxima do item' })
     @Column({ default: 1 })
