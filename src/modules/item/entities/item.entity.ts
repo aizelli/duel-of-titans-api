@@ -1,26 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { InventorySlot } from "src/modules/inventory-slot/entities/inventory-slot.entity";
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { typeItemName, typeItemRarity } from "util/listas.enum";
 
-export enum typeItemName {
-    CONSUMABLE = 'Consumable',
-    WEAPON = 'Weapon',
-    SHIELD = 'Shield',
-    ARMOR = 'Armor'
-}
-
-export enum typeItemRarity {
-    SCRAP = 'Scrap',
-    IMPROVISED = 'Improvised',
-    COMMON = 'Common',
-    UNCOMMON = 'Uncommon',
-    RARE = 'Rare',
-    EPIC = 'Epic',
-    LEGENDARY = 'Legendary',
-    MYTHIC = 'Mythic',
-    TRANSCENDENT = 'Transcendent',
-    DIVINE = 'Divine'
-}
 
 @Entity()
 export class Item {

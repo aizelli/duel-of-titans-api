@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { typeItemName, typeItemRarity } from "../entities/item.entity";
+import { typeItemName, typeItemRarity } from "util/listas.enum";
 
 export class CreateItemDto {
     @ApiProperty({ example: 'Poção de vida', description: 'Nome do Item' })

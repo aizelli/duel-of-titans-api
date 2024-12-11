@@ -1,6 +1,6 @@
 import { UpdateStatusDto } from "src/modules/status/dto/update-status.dto";
 
-export class ManageAttributes {
+export class ManageAttributesUtil {
   
   updateAttributes(updateStatus: UpdateStatusDto) {
     const newDamages = this.balanceDamage(updateStatus.strength, updateStatus.wisdom)

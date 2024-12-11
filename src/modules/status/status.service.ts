@@ -4,14 +4,14 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Status } from './entities/status.entity';
-import { ManageAttributes } from 'util/manageAttributes';
+import { ManageAttributesUtil } from 'util/manageAttributes.util';
 
 @Injectable()
 export class StatusService {
   constructor(
     @InjectRepository(Status)
     private statusRepository: Repository<Status>,
-    private manageAttributes: ManageAttributes,
+    private manageAttributes: ManageAttributesUtil,
   ) { }
 
   async create(createStatusDto: CreateStatusDto): Promise<Status> {
