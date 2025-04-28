@@ -18,6 +18,14 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @Post('with-character')
+  @ApiOperation({ summary: 'Cria um novo usuário com personagem' })
+  @ApiResponse({ status: 201, description: 'Usuário criado com sucesso.', type: User, })
+  @ApiResponse({ status: 400, description: 'Parâmetros inválidos.' })
+  async createUIserWithCharacter(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.createUserWithCharacter(createUserDto);
+  }
+
   @Get()
   @ApiOperation({ summary: 'Lista todos os usuários' })
   @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso.', type: [User], })

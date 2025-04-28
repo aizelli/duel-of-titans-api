@@ -13,16 +13,10 @@ export class CharactersService {
     @InjectRepository(Character)
     private characterRepository: Repository<Character>,
     @InjectRepository(Status)
-    private statusRepository: Repository<Status>,
-    private userService: UsersService
+    private statusRepository: Repository<Status>
   ) { }
 
   async create(createCharacterDto: CreateCharacterDto): Promise<Character> {
-    const user = await this.userService.findOne(createCharacterDto.userId);
-    if (!user) {
-      throw new NotFoundException("Usuário não encontrado.")
-    }
-
     const defaultStatus = this.statusRepository.create({
       health: 100,
       maxHealth: 100,
@@ -33,34 +27,48 @@ export class CharactersService {
       strength: 1,
       dexterity: 1,
       wisdom: 1,
-      perception: 1,
       damage: 4,
       maxDamage: 10,
       attackSpeed: 2,
       meleeDefence: 2,
       magicDefence: 2,
       evasion: 2,
-      criticalDamage: 2
+      criticalDamage: 2,
+      charisma: 1,
+      constitution: 1,
+      intelligence: 1,
     });
+
+    const status = await this.statusRepository.save(defaultStatus);
 
     const character = this.characterRepository.create({
       ...createCharacterDto,
-      user,
-      status: defaultStatus,
+      imagem_url: "",
+      experienceNextLevel: 10,
+      totalAttributePoints: 0,
+      availableAttributePoints: 3,
+      coins: 100,
+      experience: 0,
+      level: 1,
+      status,
     });
-
     return await this.characterRepository.save(character);
   }
 
-  findAll() {
+  findAll() {    
     return this.characterRepository.find();
   }
 
   async findOne(id: number): Promise<Character> {
-    return await this.characterRepository.findOne({
+    const char = await this.characterRepository.findOne({
       where: { id },
       relations: ['status']
     });
+    if(char == null){
+      throw new NotFoundException("Personagem não encontrado.")
+    }
+    console.log("char", char)
+    return char
   }
 
   async findByUserId(userId: number): Promise<Character[]> {

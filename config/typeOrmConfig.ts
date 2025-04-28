@@ -1,12 +1,12 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
-    type: 'mysql',
+    type: 'mariadb',
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '4741010@Le',
-    database: 'duel-of-titans',
+    password: '@Le4741010@Ju',
+    database: 'projeto-game',
     entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
     ],

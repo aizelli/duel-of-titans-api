@@ -9,9 +9,9 @@ import { StatusModule } from '../status/status.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Character]),
-    UsersModule, StatusModule],
+    StatusModule],
   controllers: [CharactersController],
   providers: [CharactersService],
-  exports: [TypeOrmModule]
+  exports: [TypeOrmModule, CharactersService]
 })
 export class CharactersModule { }

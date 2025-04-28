@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nest build",
     "start:dev": "nest start --watch",
-    "start:prod": "node ."
+    "start:prod": "node dist/src/main"
   },
   "keywords": [],
   "author": "",

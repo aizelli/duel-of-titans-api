@@ -33,6 +33,21 @@ export class Item {
     @ApiProperty({ example: '{"Vida": 5}', description: 'Atributos especifico do item' })
     @Column({ type: 'json', nullable: true })
     attributes: Record<string, any>;
+    
+    @ApiProperty({ example: new Date(), description: 'Data de criação do item' })
+    @Column({
+        type: 'datetime',
+        default: () => 'CURRENT_TIMESTAMP', // Define a data atual por padrão
+    })
+    createAt: Date;
+
+    @ApiProperty({ example: new Date(), description: 'Data de atualização do item' })
+    @Column({
+        type: 'datetime',
+        default: () => 'CURRENT_TIMESTAMP', // Define a data atual por padrão
+        onUpdate: 'CURRENT_TIMESTAMP', // Atualiza automaticamente
+    })
+    updateAt: Date;
 
     @ManyToMany(() => InventorySlot, (inventorySlot) => inventorySlot.items)
     inventorySlots: InventorySlot[];

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Character } from 'src/modules/characters/entities/character.entity';
 
@@ -53,7 +53,7 @@ export class User {
     })
     updateAt: Date;
 
-    @ApiProperty({ type: () => [Character], description: 'Lista de personagens associados ao usuário' })
-    @OneToMany(() => Character, (character) => character.user)
-    characters: Character[];
+    @ApiProperty({ type: () => Character, description: 'Personagem associado ao usuário' })
+    @OneToOne(() => Character, (character) => character.user, { cascade: true })
+    character: Character;
 }

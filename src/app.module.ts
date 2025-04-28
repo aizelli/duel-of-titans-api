@@ -19,8 +19,7 @@ import { AuthModule } from './modules/auth/auth.module';
     ItemModule, 
     InventorySlotModule, 
     EquipmentSlotModule,
-    ExperienceLevelsModule,
-    
+    ExperienceLevelsModule
   ]
 })
 export class AppModule { }

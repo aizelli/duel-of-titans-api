@@ -18,7 +18,7 @@ export class CreateUserDto {
         description: 'Senha do usuário',
         example: 'senhaSegura123',
     })
-    password: string;
+        password: string;
 
     @ApiProperty({
         description: 'Tipo de usuário',
